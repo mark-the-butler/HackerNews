@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import Search from './Search';
+import Table from './Table';
 
 const list = [
   {
@@ -40,39 +42,22 @@ class App extends Component {
 
   isSearched(searchTerm) {
     return (item) => item.title.toLowerCase().includes(searchTerm.toLowerCase());
-
   }
 
   render() {
+    const { list, searchTerm } = this.state;
     return (
       <div className="App">
-        <form>
-          <input type='text' onChange={(e) => this.onSearchChange(e)} />
-        </form>
-        {this.state.list.filter(this.isSearched(this.state.searchTerm)).map(item => {
-          const onHandleDimiss = () =>
-            this.onDismiss(item.objectID);
-
-          return (
-            <div key={item.objectID}>
-              <span>
-                <a href={item.url}>{item.title}</a>
-              </span>
-              <span>{item.author}</span>
-              <span>{item.num_comments}</span>
-              <span>{item.points}</span>
-              <span>
-                <button
-                  onClick={onHandleDimiss}
-                  type="button"
-                >
-                  Dismiss
-              </button>
-              </span>
-            </div>
-          );
-        }
-        )}
+        <Search
+          value={searchTerm}
+          onChange={this.onSearchChange.bind(this)}
+        />
+        <Table
+          list={list}
+          pattern={searchTerm}
+          onDismiss={this.onDismiss.bind(this)}
+          isSearched={this.isSearched.bind(this)}
+        />
       </div>
     );
   }
