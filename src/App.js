@@ -31,16 +31,16 @@ class App extends Component {
     };
   }
 
-  onDismiss(id) {
+  onDismiss = (id) => {
     let updatedList = this.state.list.filter(item => item.objectID !== id);
     this.setState({ list: updatedList });
   }
 
-  onSearchChange(event) {
+  onSearchChange = (event) => {
     this.setState({ searchTerm: event.target.value });
   }
 
-  isSearched(searchTerm) {
+  isSearched = (searchTerm) => {
     return (item) => item.title.toLowerCase().includes(searchTerm.toLowerCase());
   }
 
@@ -50,13 +50,13 @@ class App extends Component {
       <div className="App">
         <Search
           value={searchTerm}
-          onChange={this.onSearchChange.bind(this)}
+          onChange={this.onSearchChange}
         />
         <Table
           list={list}
           pattern={searchTerm}
-          onDismiss={this.onDismiss.bind(this)}
-          isSearched={this.isSearched.bind(this)}
+          onDismiss={this.onDismiss}
+          isSearched={this.isSearched}
         />
       </div>
     );
