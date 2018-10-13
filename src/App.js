@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import Search from './Search';
+import { Search } from './Search';
 import Table from './Table';
 
 const list = [
